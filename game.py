@@ -28,8 +28,6 @@ class Game:
         return guess
     
     def game_over(self):
-        print(f'\nGreat job! You did it in {self.guesses} guesses!')
-        print(f'You missed {self.missed} times out of {self.guesses}')
         play_again = input('Would you like to play again? y or n  ').lower()
         if play_again == 'y':
             Game.start()
@@ -53,4 +51,15 @@ class Game:
                 the_phrase.display()
                 game.missed+=1
                 print('Incorrect, please try again')
-        game.game_over()
+                if game.missed <= 5:
+                    print(f'You have {5 - game.missed} of 5 lives remaining!')
+                if game.missed > 5:
+                    print('You are out of lives')
+                    game.active_phrase = False
+        if not game.missed > 5:
+            print(f'\nGreat job! You did it in {self.guesses} guesses!')
+            print(f'You missed {self.missed} times out of {self.guesses}')
+            game.game_over()
+        else:
+            print('Better luck next time!')
+            game.game_over()
