@@ -3,7 +3,7 @@ import phrase
 
 class Game:
     def __init__(self, guesses=0, missed=0):
-        self.phrases = ['double tap', 'tippy toes', 'holy grail', 'goofy goober', 'rubiks cube']
+        self.phrases = ['double tap', 'ace in the hole', 'holy grail', 'goofy goober', 'rubiks cube']
         self.active_phrase = None
         self.guesses = guesses
         self.missed = missed
