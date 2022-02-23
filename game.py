@@ -57,8 +57,8 @@ class Game:
                     print('You are out of lives')
                     game.active_phrase = False
         if not game.missed > 5:
-            print(f'\nGreat job! You did it in {self.guesses} guesses!')
-            print(f'You missed {self.missed} times out of {self.guesses}')
+            print(f'\nYou Won! Great job! You did it in {game.guesses} guesses!')
+            print(f'You missed {game.missed} times out of {game.guesses}')
             game.game_over()
         else:
             print('Better luck next time!')
