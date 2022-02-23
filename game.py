@@ -1,5 +1,6 @@
 import random
 import phrase
+import string
 
 class Game:
     def __init__(self, guesses=0, missed=0):
@@ -18,11 +19,11 @@ class Game:
     
     def get_guess(self):
         guess = input('\nGuess a letter:  ').lower()
-        if guess in self.guessed_letters:
-            print('You have already guessed that one')
-            guess = input('Guess another letter:  ').lower()
-        if len(guess)>1:
+        while guess not in string.ascii_lowercase or len(guess)>1:
             guess = input('Please make a valid guess  ')
+            if guess in self.guessed_letters:
+                print('You have already guessed that one')
+                guess = input('Guess another letter:  ').lower()
         self.guessed_letters.append(guess)
         self.guesses +=1
         return guess
@@ -45,19 +46,23 @@ class Game:
             print('   ø:',*list(set(game.guessed_letters)-set(the_phrase)), sep=" ")
             if the_phrase.check_letter(the_guess):
                 the_phrase.display()
+                if game.missed == 5:
+                    print('\n~ Last Life ~')
                 if the_phrase.check_complete():
                     game.active_phrase = False
             else:
                 the_phrase.display()
                 game.missed+=1
                 print('Incorrect, please try again')
-                if game.missed <= 5:
+                if game.missed < 5:
                     print(f'You have {5 - game.missed} of 5 lives remaining!')
+                if game.missed == 5:
+                    print('Last Life Remaining')
                 if game.missed > 5:
                     print('You are out of lives')
                     game.active_phrase = False
         if not game.missed > 5:
-            print(f'\nYou Won! Great job! You did it in {game.guesses} guesses!')
+            print(f'\nYou Won! Great job, you did it in {game.guesses} guesses!')
             print(f'You missed {game.missed} times out of {game.guesses}')
             game.game_over()
         else:
