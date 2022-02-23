@@ -53,7 +53,7 @@ class Game:
             else:
                 the_phrase.display()
                 game.missed+=1
-                print('Incorrect, please try again')
+                print('\nIncorrect, please try again')
                 if game.missed < 5:
                     print(f'You have {5 - game.missed} of 5 lives remaining!')
                 if game.missed == 5:
